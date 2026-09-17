@@ -30,6 +30,8 @@ for g in data["groups"]:
     for t in g["tests"]:
         d = t.get("discussion_number")
         link = f"[{t['test']}]({REPO}/discussions/{d})" if d else t["test"]
+        std = "; ".join(f"{k}: {v}" for k, v in t.get("standards", {}).items())
+        if std: link += f"<br><sub>{std}</sub>"
         lines.append(f"| {link} | {t['status']} | {t['params']} | {thr(t)} | {t['discussion']} |")
 lines.append("")
 lines.append("## Files\n")

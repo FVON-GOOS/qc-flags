@@ -19,7 +19,11 @@
             ]
           ],
           "discussion": "Cutoff year: 1900, 1990 or 2010.",
-          "discussion_number": 1
+          "discussion_number": 1,
+          "standards": {
+            "QARTOD": "Gap Test and Syntax Test",
+            "SeaDataNet": "Impossible date test"
+          }
         },
         {
           "test": "Impossible location",
@@ -32,7 +36,11 @@
             ]
           ],
           "discussion": "Settled.",
-          "discussion_number": 2
+          "discussion_number": 2,
+          "standards": {
+            "QARTOD": "Location Test",
+            "SeaDataNet": "Impossible location test"
+          }
         },
         {
           "test": "Impossible speed",
@@ -49,7 +57,10 @@
             ]
           ],
           "discussion": "Confirm the limits: based on GPS accuracy or on fishing speed, and whether they vary by gear.",
-          "discussion_number": 3
+          "discussion_number": 3,
+          "standards": {
+            "QARTOD": "Location Test (displacement)"
+          }
         },
         {
           "test": "Global range",
@@ -66,7 +77,11 @@
             ]
           ],
           "discussion": "Sensor tables incomplete. Decide whether two inner tiers, calibrated range and operating range, give 2 and 3.",
-          "discussion_number": 4
+          "discussion_number": 4,
+          "standards": {
+            "QARTOD": "Gross Range Test",
+            "SeaDataNet": "Global range test"
+          }
         },
         {
           "test": "Spike",
@@ -79,7 +94,11 @@
             ]
           ],
           "discussion": "Absolute differences or standard deviations. No pressure threshold yet.",
-          "discussion_number": 5
+          "discussion_number": 5,
+          "standards": {
+            "QARTOD": "Spike Test",
+            "SeaDataNet": "Spike test"
+          }
         },
         {
           "test": "Stuck value",
@@ -96,7 +115,11 @@
             ]
           ],
           "discussion": "Counts and tolerance for \"identical\" (0.001 or 0.01 °C). Row counts mislead on fixed gear, where sampling slows at rest; count time instead.",
-          "discussion_number": 6
+          "discussion_number": 6,
+          "standards": {
+            "QARTOD": "Flat Line Test",
+            "SeaDataNet": "Stuck value test"
+          }
         },
         {
           "test": "Calibration date",
@@ -135,7 +158,11 @@
             ]
           ],
           "discussion": "Climatology source and coastal accuracy; our data are meant to improve the climatologies.",
-          "discussion_number": 8
+          "discussion_number": 8,
+          "standards": {
+            "QARTOD": "Climatology Test",
+            "SeaDataNet": "Regional range test"
+          }
         },
         {
           "test": "Mud",
@@ -161,7 +188,10 @@
             ]
           ],
           "discussion": "Decide between long-term calibration drift, which belongs to delayed mode, and a real-time damaged-sensor check on the bottom segment.",
-          "discussion_number": 10
+          "discussion_number": 10,
+          "standards": {
+            "SeaDataNet": "Sensor drift test"
+          }
         }
       ]
     },
@@ -179,7 +209,10 @@
             ]
           ],
           "discussion": "Kept off because land masks are poor near shore. If a program enables it, 3 rather than 4.",
-          "discussion_number": 11
+          "discussion_number": 11,
+          "standards": {
+            "SeaDataNet": "Position on land test"
+          }
         }
       ]
     },
@@ -214,7 +247,11 @@
             ]
           ],
           "discussion": "Compulsory, optional or not applied.",
-          "discussion_number": 13
+          "discussion_number": 13,
+          "standards": {
+            "QARTOD": "Rate of Change Test",
+            "SeaDataNet": "Gradient test"
+          }
         },
         {
           "test": "Cold surface",
