@@ -6,6 +6,7 @@ from urllib.parse import quote
 OUT = pathlib.Path(__file__).parent
 DATA = json.loads((OUT / "flags.json").read_text(encoding="utf-8"))
 REPO = DATA["repo"]
+QV = DATA.get("qc_variables", {})
 BIN = {"compulsory": "agreed", "optional": "optional", "not applied": "notapplied", "to decide": "review"}
 
 def chip(v):
@@ -15,10 +16,12 @@ def row(t):
     thr = "<br>".join(f"{H.escape(text)} {chip(flag)}".strip() for text, flag in t["thresholds"])
     d = t.get("discussion_number")
     issue = f'<a class="issue" href="{REPO}/discussions/{d}" target="_blank" rel="noopener">Discussion #{d}</a>' if d else ""
-    std = "".join(f'<span class="std"><b>{H.escape(k)}</b> {H.escape(v)}</span>' for k, v in t.get("standards", {}).items())
+    flags = t.get("flag") or []
+    std = "".join(f'<code class="fname">{H.escape(f)}</code>' for f in flags)
+    params = "<br>".join(f'{H.escape(x.strip())} <code class="qv">{H.escape(QV.get(x.strip(), ""))}</code>' for x in t["params"].split(","))
     return (f'<tr><td>{H.escape(t["test"])}{std}{issue}</td>'
             f'<td><span class="bin {BIN[t["status"]]}">{H.escape(t["status"])}</span></td>'
-            f'<td>{H.escape(t["params"])}</td><td>{thr}</td><td>{H.escape(t["discussion"])}</td></tr>')
+            f'<td>{params}</td><td>{thr}</td><td>{H.escape(t["discussion"])}</td></tr>')
 
 rows = []
 for g in DATA["groups"]:
@@ -35,7 +38,8 @@ table.matrix{font-size:14.5px} table.matrix td:first-child{font-weight:600;white
 table.matrix td .fl{margin:0 3px;vertical-align:baseline}
 table.matrix tr.grp td{font-family:"Barlow Condensed",sans-serif;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--shallows);padding:6px 9px}
 table.matrix td:nth-child(4){min-width:26ch} table.matrix td:last-child{max-width:40ch}
-.std{display:block;font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:500;color:var(--ink-2);margin-top:2px;letter-spacing:.02em} .std b{font-weight:700;color:var(--ink)}
+code.fname{display:block;font-family:"IBM Plex Mono",Consolas,monospace;font-size:12.5px;font-weight:400;color:var(--ink-2);margin-top:3px}
+code.qv{font-family:"IBM Plex Mono",Consolas,monospace;font-size:12px;color:var(--ink-2);margin-left:4px}
 a.issue{display:block;font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:600;letter-spacing:.04em;margin-top:2px}
 .bin{display:inline-block;font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1px 7px;border-radius:2px;border:1px solid var(--rule);white-space:nowrap}
 .bin.agreed{border-color:#2F8F4E;color:#2F8F4E}.bin.optional{border-color:#3C7DC4;color:#3C7DC4}.bin.notapplied{border-color:#7B8B94;color:#7B8B94}.bin.review{border-color:#E0952B;color:#B8741A}

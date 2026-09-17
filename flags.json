@@ -20,10 +20,9 @@
           ],
           "discussion": "Cutoff year: 1900, 1990 or 2010.",
           "discussion_number": 1,
-          "standards": {
-            "QARTOD": "Gap Test and Syntax Test",
-            "SeaDataNet": "Impossible date test"
-          }
+          "flag": [
+            "flag_date"
+          ]
         },
         {
           "test": "Impossible location",
@@ -37,10 +36,9 @@
           ],
           "discussion": "Settled.",
           "discussion_number": 2,
-          "standards": {
-            "QARTOD": "Location Test",
-            "SeaDataNet": "Impossible location test"
-          }
+          "flag": [
+            "flag_location"
+          ]
         },
         {
           "test": "Impossible speed",
@@ -58,9 +56,9 @@
           ],
           "discussion": "Confirm the limits: based on GPS accuracy or on fishing speed, and whether they vary by gear.",
           "discussion_number": 3,
-          "standards": {
-            "QARTOD": "Location Test (displacement)"
-          }
+          "flag": [
+            "flag_speed"
+          ]
         },
         {
           "test": "Global range",
@@ -78,10 +76,9 @@
           ],
           "discussion": "Sensor tables incomplete. Decide whether two inner tiers, calibrated range and operating range, give 2 and 3.",
           "discussion_number": 4,
-          "standards": {
-            "QARTOD": "Gross Range Test",
-            "SeaDataNet": "Global range test"
-          }
+          "flag": [
+            "flag_global_range"
+          ]
         },
         {
           "test": "Spike",
@@ -95,10 +92,10 @@
           ],
           "discussion": "Absolute differences or standard deviations. No pressure threshold yet.",
           "discussion_number": 5,
-          "standards": {
-            "QARTOD": "Spike Test",
-            "SeaDataNet": "Spike test"
-          }
+          "flag": [
+            "flag_temp_spike",
+            "flag_sal_spike"
+          ]
         },
         {
           "test": "Stuck value",
@@ -116,10 +113,10 @@
           ],
           "discussion": "Counts and tolerance for \"identical\" (0.001 or 0.01 °C). Row counts mislead on fixed gear, where sampling slows at rest; count time instead.",
           "discussion_number": 6,
-          "standards": {
-            "QARTOD": "Flat Line Test",
-            "SeaDataNet": "Stuck value test"
-          }
+          "flag": [
+            "flag_temp_stuck",
+            "flag_sal_stuck"
+          ]
         },
         {
           "test": "Calibration date",
@@ -140,7 +137,10 @@
             ]
           ],
           "discussion": "We need all manufacturers' information to apply this flag.",
-          "discussion_number": 7
+          "discussion_number": 7,
+          "flag": [
+            "flag_calibration_date"
+          ]
         }
       ]
     },
@@ -159,10 +159,9 @@
           ],
           "discussion": "Climatology source and coastal accuracy; our data are meant to improve the climatologies.",
           "discussion_number": 8,
-          "standards": {
-            "QARTOD": "Climatology Test",
-            "SeaDataNet": "Regional range test"
-          }
+          "flag": [
+            "flag_clima"
+          ]
         },
         {
           "test": "Mud",
@@ -175,7 +174,10 @@
             ]
           ],
           "discussion": "Detection criteria per parameter still to write.",
-          "discussion_number": 9
+          "discussion_number": 9,
+          "flag": [
+            "flag_mud"
+          ]
         },
         {
           "test": "Drift",
@@ -189,9 +191,9 @@
           ],
           "discussion": "Decide between long-term calibration drift, which belongs to delayed mode, and a real-time damaged-sensor check on the bottom segment.",
           "discussion_number": 10,
-          "standards": {
-            "SeaDataNet": "Sensor drift test"
-          }
+          "flag": [
+            "flag_drift"
+          ]
         }
       ]
     },
@@ -210,9 +212,9 @@
           ],
           "discussion": "Kept off because land masks are poor near shore. If a program enables it, 3 rather than 4.",
           "discussion_number": 11,
-          "standards": {
-            "SeaDataNet": "Position on land test"
-          }
+          "flag": [
+            "flag_land"
+          ]
         }
       ]
     },
@@ -234,7 +236,10 @@
             ]
           ],
           "discussion": "We need to differentiate mobile from fixed gear. This should not apply to drifting gear.",
-          "discussion_number": 12
+          "discussion_number": 12,
+          "flag": [
+            "flag_gear_type"
+          ]
         },
         {
           "test": "Rate of change",
@@ -248,10 +253,9 @@
           ],
           "discussion": "Compulsory, optional or not applied.",
           "discussion_number": 13,
-          "standards": {
-            "QARTOD": "Rate of Change Test",
-            "SeaDataNet": "Gradient test"
-          }
+          "flag": [
+            "flag_RoC"
+          ]
         },
         {
           "test": "Cold surface",
@@ -264,7 +268,10 @@
             ]
           ],
           "discussion": "Separate test, or surface thresholds inside the spike test.",
-          "discussion_number": 14
+          "discussion_number": 14,
+          "flag": [
+            "flag_cold_surface"
+          ]
         },
         {
           "test": "Response time",
@@ -277,7 +284,10 @@
             ]
           ],
           "discussion": "Implement or not; quantify per sensor; 3 rather than 4 since the data are imprecise, not wrong.",
-          "discussion_number": 15
+          "discussion_number": 15,
+          "flag": [
+            "flag_response_time"
+          ]
         },
         {
           "test": "Rollover",
@@ -290,11 +300,27 @@
             ]
           ],
           "discussion": "Threshold, what counts as adjacent, profiling gear only, whether salinity gets the same.",
-          "discussion_number": 16
+          "discussion_number": 16,
+          "flag": [
+            "flag_rollover"
+          ]
         }
       ]
     }
   ],
   "proposals_discussion": 17,
-  "pages_url": "https://fvon-goos.github.io/qc-flags/"
+  "pages_url": "https://fvon-goos.github.io/qc-flags/",
+  "qc_variables": {
+    "time": "DATETIME_QC",
+    "position": "LOCATION_QC",
+    "pressure": "PRESSURE_QC",
+    "temperature": "TEMPERATURE_QC",
+    "salinity": "SALINITY_QC",
+    "conductivity": "CONDUCTIVITY_QC"
+  },
+  "seadatanet_variables": {
+    "position": "POSITION_QC",
+    "pressure": "DEPTH_QC",
+    "temperature": "TEMP_QC"
+  }
 }

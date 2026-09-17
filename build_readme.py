@@ -22,6 +22,9 @@ lines.append("**How to give feedback.** Every test has a [Discussion](../../disc
 lines.append("## Flag scale\n")
 lines.append("FVON uses the IOC Manuals and Guides 54 scale: 0 no QC, 1 good, 2 probably good, 3 suspect, 4 bad, 5 corrected, 9 missing. One flag per variable; a derived variable inherits the worst flag of its inputs. "
              "QARTOD uses 1 pass, 2 not evaluated, 3 suspect, 4 fail, 9 missing. SeaDataNet (L20) uses 0 to 9 with 3 meaning probably bad, plus 6 below detection, 7 in excess, 8 interpolated and letter codes for uncertain values.\n")
+qv, sdn = data.get("qc_variables", {}), data.get("seadatanet_variables", {})
+lines.append("## Variable names\n")
+lines.append("Each test writes its own flag, named under the test in the table, and contributes to the combined flag of every parameter it assesses. FVON names in the code today: " + ", ".join(f"{k} `{v}`" for k, v in qv.items()) + ". The SeaDataNet publication of FVON data names one flag per parameter after the parameter itself (" + ", ".join(f"{k} `{v}`" for k, v in sdn.items()) + ", `QV_SEADATANET` in ODV exports) and carries no separate time flag. Which set FVON adopts, and whether the per-test flags are published alongside the combined ones, is part of the discussion.\n")
 lines.append("## Test by test\n")
 lines.append("| Test | Status | Parameters | Thresholds | Discussion |")
 lines.append("|---|---|---|---|---|")
@@ -30,9 +33,13 @@ for g in data["groups"]:
     for t in g["tests"]:
         d = t.get("discussion_number")
         link = f"[{t['test']}]({REPO}/discussions/{d})" if d else t["test"]
+        fl = " ".join(f"`{f}`" for f in (t.get("flag") or []))
+        if fl: link += f"<br>{fl}"
         std = "; ".join(f"{k}: {v}" for k, v in t.get("standards", {}).items())
         if std: link += f"<br><sub>{std}</sub>"
-        lines.append(f"| {link} | {t['status']} | {t['params']} | {thr(t)} | {t['discussion']} |")
+        qv = data.get("qc_variables", {})
+        params = "<br>".join(f"{x.strip()} `{qv.get(x.strip(), '')}`" for x in t["params"].split(","))
+        lines.append(f"| {link} | {t['status']} | {params} | {thr(t)} | {t['discussion']} |")
 lines.append("")
 lines.append("## Files\n")
 lines.append("- `flags.json`: the data behind the table (status, parameters, thresholds, discussion per test). Change it and run `build_flags.py` and `build_readme.py`.")
