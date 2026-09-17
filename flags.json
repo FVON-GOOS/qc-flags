@@ -1,0 +1,263 @@
+{
+  "repo": "https://github.com/FVON-GOOS/qc-flags",
+  "groups": [
+    {
+      "name": "Compulsory",
+      "tests": [
+        {
+          "test": "Impossible date",
+          "status": "compulsory",
+          "params": "time",
+          "thresholds": [
+            [
+              "before 1990 or in the future",
+              4
+            ],
+            [
+              "gap longer than the expected interval",
+              3
+            ]
+          ],
+          "discussion": "Cutoff year: 1900, 1990 or 2010.",
+          "discussion_number": 1
+        },
+        {
+          "test": "Impossible location",
+          "status": "compulsory",
+          "params": "position",
+          "thresholds": [
+            [
+              "latitude outside ±90 or longitude outside ±180",
+              4
+            ]
+          ],
+          "discussion": "Settled.",
+          "discussion_number": 2
+        },
+        {
+          "test": "Impossible speed",
+          "status": "compulsory",
+          "params": "position",
+          "thresholds": [
+            [
+              "mobile gear, 8 to 30 knots",
+              3
+            ],
+            [
+              "over 30 knots",
+              4
+            ]
+          ],
+          "discussion": "Confirm the limits: based on GPS accuracy or on fishing speed, and whether they vary by gear.",
+          "discussion_number": 3
+        },
+        {
+          "test": "Global range",
+          "status": "compulsory",
+          "params": "temperature, pressure, salinity, conductivity",
+          "thresholds": [
+            [
+              "outside the sensor's range from the manufacturer table",
+              4
+            ],
+            [
+              "sensor unknown: outside −2.5 to 40 °C, 0 to 11000 dbar, 2 to 42 PSU",
+              4
+            ]
+          ],
+          "discussion": "Sensor tables incomplete. Decide whether two inner tiers, calibrated range and operating range, give 2 and 3.",
+          "discussion_number": 4
+        },
+        {
+          "test": "Spike",
+          "status": "compulsory",
+          "params": "temperature, salinity, pressure",
+          "thresholds": [
+            [
+              "difference to both neighbours over 6 °C above 200 m, 2 °C below, or 0.9 PSU",
+              3
+            ]
+          ],
+          "discussion": "Absolute differences or standard deviations. No pressure threshold yet.",
+          "discussion_number": 5
+        },
+        {
+          "test": "Stuck value",
+          "status": "compulsory",
+          "params": "temperature, salinity, pressure",
+          "thresholds": [
+            [
+              "3 to 5 identical values within 0.001",
+              3
+            ],
+            [
+              "more than 5",
+              4
+            ]
+          ],
+          "discussion": "Counts and tolerance for \"identical\" (0.001 or 0.01 °C). Row counts mislead on fixed gear, where sampling slows at rest; count time instead.",
+          "discussion_number": 6
+        },
+        {
+          "test": "Calibration date",
+          "status": "compulsory",
+          "params": "temperature, pressure, salinity",
+          "thresholds": [
+            [
+              "past the manufacturer's recalibration interval",
+              3
+            ],
+            [
+              "no calibration date",
+              4
+            ],
+            [
+              "no timestamp",
+              9
+            ]
+          ],
+          "discussion": "We need all manufacturers' information to apply this flag.",
+          "discussion_number": 7
+        }
+      ]
+    },
+    {
+      "name": "Optional",
+      "tests": [
+        {
+          "test": "Climatology",
+          "status": "optional",
+          "params": "temperature, salinity",
+          "thresholds": [
+            [
+              "outside the seasonal mean ± N standard deviations, WOA or regional",
+              3
+            ]
+          ],
+          "discussion": "Climatology source and coastal accuracy; our data are meant to improve the climatologies.",
+          "discussion_number": 8
+        },
+        {
+          "test": "Mud",
+          "status": "optional",
+          "params": "temperature, salinity",
+          "thresholds": [
+            [
+              "fouling signature on the ascent",
+              3
+            ]
+          ],
+          "discussion": "Detection criteria per parameter still to write.",
+          "discussion_number": 9
+        },
+        {
+          "test": "Drift",
+          "status": "optional",
+          "params": "temperature, salinity",
+          "thresholds": [
+            [
+              "not defined",
+              null
+            ]
+          ],
+          "discussion": "Decide between long-term calibration drift, which belongs to delayed mode, and a real-time damaged-sensor check on the bottom segment.",
+          "discussion_number": 10
+        }
+      ]
+    },
+    {
+      "name": "Not applied",
+      "tests": [
+        {
+          "test": "Position on land",
+          "status": "not applied",
+          "params": "position",
+          "thresholds": [
+            [
+              "on land per ETOPO5 or better",
+              4
+            ]
+          ],
+          "discussion": "Kept off because land masks are poor near shore. If a program enables it, 3 rather than 4.",
+          "discussion_number": 11
+        }
+      ]
+    },
+    {
+      "name": "To decide",
+      "tests": [
+        {
+          "test": "Gear type control",
+          "status": "to decide",
+          "params": "position",
+          "thresholds": [
+            [
+              "fixed gear, deployment to retrieval over 200 m",
+              3
+            ],
+            [
+              "mobile gear: to be defined; drifting gear: not applied",
+              null
+            ]
+          ],
+          "discussion": "We need to differentiate mobile from fixed gear. This should not apply to drifting gear.",
+          "discussion_number": 12
+        },
+        {
+          "test": "Rate of change",
+          "status": "to decide",
+          "params": "temperature, salinity",
+          "thresholds": [
+            [
+              "change from the previous value over 3 standard deviations of the segment",
+              3
+            ]
+          ],
+          "discussion": "Compulsory, optional or not applied.",
+          "discussion_number": 13
+        },
+        {
+          "test": "Cold surface",
+          "status": "to decide",
+          "params": "temperature",
+          "thresholds": [
+            [
+              "not defined",
+              null
+            ]
+          ],
+          "discussion": "Separate test, or surface thresholds inside the spike test.",
+          "discussion_number": 14
+        },
+        {
+          "test": "Response time",
+          "status": "to decide",
+          "params": "temperature",
+          "thresholds": [
+            [
+              "not defined; thermistor lag blurs gradients",
+              null
+            ]
+          ],
+          "discussion": "Implement or not; quantify per sensor; 3 rather than 4 since the data are imprecise, not wrong.",
+          "discussion_number": 15
+        },
+        {
+          "test": "Rollover",
+          "status": "to decide",
+          "params": "temperature",
+          "thresholds": [
+            [
+              "proposal: bottom value more than 1 °C from its neighbour",
+              3
+            ]
+          ],
+          "discussion": "Threshold, what counts as adjacent, profiling gear only, whether salinity gets the same.",
+          "discussion_number": 16
+        }
+      ]
+    }
+  ],
+  "proposals_discussion": 17,
+  "pages_url": "https://fvon-goos.github.io/qc-flags/"
+}

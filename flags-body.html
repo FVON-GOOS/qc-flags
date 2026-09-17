@@ -1,0 +1,41 @@
+<div class="wrap">
+<header>
+  <div class="eyebrow">FVON Data Management Subcommittee &middot; September 2026</div>
+  <h1>QC flags: where we are</h1>
+  <p class="lede">One row per test: its status, the parameters it flags, the thresholds and the flag each condition produces, and what the group still has to decide. A short description of the three flag standards we publish in comes first.</p>
+</header>
+
+<h2>The three standards</h2>
+<div class="three">
+  <div>
+    <h3>FVON (to be discussed)</h3>
+    <p>Real-time tests applied to every FVON record, with delayed-mode QC left for later. Flag scale from IOC Manuals and Guides 54: <span class="fl f0">0</span> no QC, <span class="fl f1">1</span> good, <span class="fl f2">2</span> probably good, <span class="fl f3">3</span> suspect, <span class="fl f4">4</span> bad, <span class="fl f5">5</span> corrected, <span class="fl f9">9</span> missing. One flag per variable; a derived variable inherits the worst flag of its inputs.</p>
+  </div>
+  <div>
+    <h3>QARTOD</h3>
+    <p>US IOOS manual for real-time QC of temperature and salinity, v2.1, 2020. Thirteen tests: five required (gap, syntax, location, gross range, climatology), three strongly recommended (spike, rate of change, flat line), five suggested (multi-variate, attenuated signal, neighbour, TS curve, density inversion). Most tests carry two thresholds, one for suspect and one for fail. Flag scale: <span class="fl f1">1</span> pass, <span class="fl f0">2</span> not evaluated, <span class="fl f3">3</span> suspect, <span class="fl f4">4</span> fail, <span class="fl f9">9</span> missing. No 0, no probably good, no corrected.</p>
+  </div>
+  <div>
+    <h3>SeaDataNet</h3>
+    <p>Data Quality Control Procedures v2, May 2010. Automatic checks on every value: valid date and time, valid latitude and longitude, position not on land (ETOPO2), global range, regional range, deepest pressure. For temperature and salinity it adopts the Argo and GOSUD tests: pressure increasing, spike, gradient, digit rollover, stuck value, density inversion, grey list, sensor drift, frozen profile, climatology, instrument comparison. Flag scale L20: <span class="fl f0">0</span> no QC, <span class="fl f1">1</span> good, <span class="fl f2">2</span> probably good, <span class="fl f3">3</span> probably bad, <span class="fl f4">4</span> bad, <span class="fl f5">5</span> changed, 6 below detection, 7 in excess, <span class="fl f5">8</span> interpolated, <span class="fl f9">9</span> missing, plus letter codes for uncertain values. One flag per parameter; flags describe the value and the value itself is never changed.</p>
+  </div>
+</div>
+
+<h2>Test by test</h2>
+<p class="prose small">Thresholds give the condition and the flag FVON writes on the parameters listed. Parameters are the variables that receive the flag, one flag each, as SeaDataNet requires.</p>
+<div class="feedback">
+  <p><strong>How to give feedback.</strong> Every test has its own thread in the Discussions of the <a href="https://github.com/FVON-GOOS/qc-flags/discussions" target="_blank" rel="noopener">FVON-GOOS qc-flags repository</a> on GitHub, next to the global attributes vote. Reply there with the status you want (compulsory, optional, not applied), the thresholds you would apply and why. One reply per person is enough; edit it if you change your mind. This page is updated from the threads before each subcommittee meeting. To suggest a test that is not listed, use the <a href="{{NEW_ISSUE}}" target="_blank" rel="noopener">proposals thread</a>.</p>
+</div>
+<div class="tablewrap">
+{{TABLE}}
+</div>
+
+<h2>What is settled and what is not</h2>
+<div class="prose">
+<p><strong>Settled:</strong> the seven compulsory tests, the flag scale, impossible location, the 8 and 30 knot speed limits, the spike thresholds for temperature and salinity and the stuck-value counts.</p>
+<p><strong>Open on the compulsory tests:</strong> the date cutoff, the per-sensor global-range tables, whether spike uses absolute differences or standard deviations, the stuck-value tolerance, and the manufacturers' calibration intervals.</p>
+<p><strong>To decide:</strong> the five tests in the last group, and the definitions of drift and mud. Proposed answers for all of them are in the July best-practices draft.</p>
+</div>
+
+<footer>FVON Data Management Subcommittee, September 2026. Source and discussions: github.com/FVON-GOOS/qc-flags.</footer>
+</div>

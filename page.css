@@ -1,0 +1,67 @@
+:root{
+  --paper:#F4F3EE; --panel:#FFFFFF; --shallows:#D8E8EF; --ink:#1B2730; --ink-2:#55656F; --rule:#C3CFD5;
+  --accent:#B4166B;
+  --f0:#8D9AA3; --f1:#2F8F4E; --f2:#8DB53C; --f3:#E0952B; --f4:#C6352B; --f5:#3C7DC4; --f9:#5A6670;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F1B22; --panel:#152530; --shallows:#173544; --ink:#E7EDF0; --ink-2:#A2B2BB; --rule:#2F4854;
+    --accent:#F27AB8;
+    --f0:#7F8D96; --f1:#4DB56E; --f2:#A6CB55; --f3:#E9A94A; --f4:#E0584D; --f5:#5E9BE0; --f9:#8A98A2;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F1B22; --panel:#152530; --shallows:#173544; --ink:#E7EDF0; --ink-2:#A2B2BB; --rule:#2F4854;
+  --accent:#F27AB8;
+  --f0:#7F8D96; --f1:#4DB56E; --f2:#A6CB55; --f3:#E9A94A; --f4:#E0584D; --f5:#5E9BE0; --f9:#8A98A2;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;font-size:17px;line-height:1.55;padding:0 20px;padding-block:36px 64px}
+.wrap{width:100%;margin:0}
+.prose{max-width:none}
+h1,h2{font-family:"Barlow Condensed","Arial Narrow","Roboto Condensed",sans-serif;line-height:1.05;margin:0;text-wrap:balance}
+h1{font-size:clamp(36px,5.5vw,56px);font-weight:600;margin-top:12px}
+h2{font-size:26px;font-weight:600;margin-top:52px;margin-bottom:6px}
+.eyebrow{font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+p{margin:12px 0}
+.lede{font-size:20px;line-height:1.45}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+figure{margin:32px 0 0}
+.figure-scroll{overflow-x:auto;padding-bottom:6px}
+.funnel-svg{display:block;width:100%;min-width:1000px;height:auto;font-family:"Barlow Condensed","Arial Narrow",sans-serif}
+figcaption{font-size:15px;color:var(--ink-2);margin-top:8px;font-style:italic}
+/* svg theming */
+.funnel{fill:var(--shallows);opacity:.75}
+.box{fill:var(--panel);stroke:var(--rule);stroke-width:1.2}
+.box-accent{stroke:var(--accent);stroke-width:1.6}
+.box-tbd{stroke-dasharray:5 4}
+.rule{stroke:var(--rule);stroke-width:1}
+.line{fill:none;stroke:var(--ink-2);stroke-width:1.2}
+.line-strong{stroke:var(--ink);stroke-width:1.6}
+.arrhead{fill:var(--ink)}
+.funnel-svg .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;fill:var(--ink-2);text-transform:none}
+.funnel-svg .eyebrow-accent{fill:var(--accent)}
+.funnel-svg .muted{font-size:12px;fill:var(--ink-2);font-family:"Source Serif 4",Georgia,serif;font-style:italic}
+.inname{font-size:16px;font-weight:600;fill:var(--ink)}
+.stitle{font-size:22px;font-weight:600;fill:var(--ink)}
+.otitle{font-size:16px;font-weight:600;fill:var(--ink)}
+.funnel-svg .t{font-size:13px;fill:var(--ink);font-family:"Source Serif 4",Georgia,serif}
+.t-strong{font-size:13px;fill:var(--ink);font-weight:700}
+.gsub{font-size:11px;fill:var(--ink-2);font-family:"Source Serif 4",Georgia,serif;font-style:italic}
+.flag-0{fill:var(--f0)}.flag-1{fill:var(--f1)}.flag-2{fill:var(--f2)}.flag-3{fill:var(--f3)}.flag-4{fill:var(--f4)}.flag-5{fill:var(--f5)}.flag-9{fill:var(--f9)}
+.flagtxt{font-size:11px;font-weight:700;fill:#fff;font-family:"IBM Plex Mono",Consolas,monospace}
+/* table */
+.tablewrap{overflow-x:auto;margin-top:14px}
+table{border-collapse:collapse;width:100%;font-size:15.5px}
+th,td{text-align:left;padding:7px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-family:"Barlow Condensed",sans-serif;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+td.c,th.c{text-align:center}
+.fl{display:inline-block;min-width:26px;padding:1px 6px;border-radius:2px;color:#fff;font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;text-align:center}
+.fl.f0{background:var(--f0)}.fl.f1{background:var(--f1)}.fl.f2{background:var(--f2)}.fl.f3{background:var(--f3)}.fl.f4{background:var(--f4)}.fl.f5{background:var(--f5)}.fl.f9{background:var(--f9)}
+.fl.none{background:transparent;color:var(--ink-2);border:1px dashed var(--rule)}
+.small{font-size:14.5px;color:var(--ink-2)}
+ul.docs{padding-left:22px;margin:10px 0}
+ul.docs li{margin:5px 0}
+footer{margin-top:52px;padding-top:14px;border-top:1px solid var(--rule);font-size:14.5px;color:var(--ink-2)}
+@media (max-width:600px){ body{font-size:16px} .lede{font-size:18px} h2{font-size:23px;margin-top:40px} }
