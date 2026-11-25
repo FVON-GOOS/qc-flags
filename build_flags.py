@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Builds the QC flags status page from flags.json (status, thresholds, discussion per test)."""
+"""Builds the QC flags status page, docs/index.html, from flags.json (current status, thresholds, discussion per test)."""
 import json, pathlib, html as H
 from urllib.parse import quote
 
@@ -7,7 +7,8 @@ OUT = pathlib.Path(__file__).parent
 DATA = json.loads((OUT / "flags.json").read_text(encoding="utf-8"))
 REPO = DATA["repo"]
 QV = DATA.get("qc_variables", {})
-BIN = {"compulsory": "agreed", "optional": "optional", "not applied": "notapplied", "to decide": "review"}
+BIN = {"required": "agreed", "optional": "optional", "not applicable": "notapplied", "to decide": "review"}
+POLL = f"{REPO}/discussions/{DATA['poll_discussion']}"
 
 def chip(v):
     return f'<span class="fl f{v}">{v}</span>' if v is not None else ""
@@ -21,13 +22,11 @@ def row(t):
     params = "<br>".join(f'{H.escape(x.strip())} <code class="qv">{H.escape(QV.get(x.strip(), ""))}</code>' for x in t["params"].split(","))
     return (f'<tr><td>{H.escape(t["test"])}{std}{issue}</td>'
             f'<td><span class="bin {BIN[t["status"]]}">{H.escape(t["status"])}</span></td>'
+            f'<td><a class="poll" href="{POLL}" target="_blank" rel="noopener">to be decided in the poll</a></td>'
             f'<td>{params}</td><td>{thr}</td><td>{H.escape(t["discussion"])}</td></tr>')
 
-rows = []
-for g in DATA["groups"]:
-    rows.append(f'<tr class="grp"><td colspan="5">{H.escape(g["name"])}</td></tr>')
-    rows += [row(t) for t in g["tests"]]
-table = ('<table class="matrix">\n<thead><tr><th>Test</th><th>Status</th><th>Parameters</th><th>Thresholds</th><th>Discussion</th></tr></thead>\n'
+rows = [row(t) for t in DATA["tests"]]
+table = ('<table class="matrix">\n<thead><tr><th>Test</th><th>Current status</th><th>Poll</th><th>Parameters</th><th>Thresholds</th><th>Discussion</th></tr></thead>\n'
          '<tbody>\n' + "\n".join(rows) + '\n</tbody>\n</table>')
 
 new_issue = f"{REPO}/discussions/{DATA.get('proposals_discussion', '')}"
@@ -37,7 +36,8 @@ EXTRA = """
 table.matrix{font-size:14.5px} table.matrix td:first-child{font-weight:600;white-space:nowrap}
 table.matrix td .fl{margin:0 3px;vertical-align:baseline}
 table.matrix tr.grp td{font-family:"Barlow Condensed",sans-serif;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--shallows);padding:6px 9px}
-table.matrix td:nth-child(4){min-width:26ch} table.matrix td:last-child{max-width:40ch}
+table.matrix td:nth-child(5){min-width:26ch} table.matrix td:last-child{max-width:40ch}
+a.poll{font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:600;letter-spacing:.04em}
 code.fname{display:block;font-family:"IBM Plex Mono",Consolas,monospace;font-size:12.5px;font-weight:400;color:var(--ink-2);margin-top:3px}
 code.qv{font-family:"IBM Plex Mono",Consolas,monospace;font-size:12px;color:var(--ink-2);margin-left:4px}
 a.issue{display:block;font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:600;letter-spacing:.04em;margin-top:2px}
@@ -53,12 +53,12 @@ a.issue{display:block;font-family:"Barlow Condensed",sans-serif;font-size:13px;f
 """
 
 CSS = (OUT / "page.css").read_text(encoding="utf-8") + EXTRA
-BODY = (OUT / "flags-body.html").read_text(encoding="utf-8").replace("{{TABLE}}", table).replace("{{NEW_ISSUE}}", new_issue)
+BODY = (OUT / "flags-body.html").read_text(encoding="utf-8").replace("{{TABLE}}", table).replace("{{NEW_ISSUE}}", new_issue).replace("{{POLL}}", POLL)
 page = ('<title>FVON QC Flags Status</title>\n'
         '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700'
         '&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400'
         '&family=IBM+Plex+Mono:wght@400;500&display=swap">\n'
         f'<style>\n{CSS}\n</style>\n{BODY}')
-(OUT / "fvon-qc-flags.html").write_text(page, encoding="utf-8")
-print("wrote", len(page), "bytes;", sum(len(g["tests"]) for g in DATA["groups"]), "tests")
+(OUT / "docs" / "index.html").write_text(page, encoding="utf-8")
+print("wrote docs/index.html,", len(page), "bytes;", len(DATA["tests"]), "tests")

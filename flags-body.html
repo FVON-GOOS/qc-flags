@@ -2,7 +2,7 @@
 <header>
   <div class="eyebrow">FVON Data Management Subcommittee &middot; September 2026</div>
   <h1>QC flags: where we are</h1>
-  <p class="lede">One row per test: its status, the parameters it flags, the thresholds and the flag each condition produces, and what the group still has to decide. A short description of the three flag standards we publish in comes first.</p>
+  <p class="lede">One row per test: its current status, the parameters it flags, the thresholds and the flag each condition produces, and what the group still has to decide. A short description of the three flag standards we publish in comes first.</p>
 </header>
 
 <h2>The three standards</h2>
@@ -25,7 +25,8 @@
 <p class="prose small">Thresholds give the condition and the flag each test produces. Under every test is the name of its own flag, as the code writes it today; next to every parameter is the combined flag variable that parameter carries.</p>
 <div class="legend"><b>Variable names</b> FVON today: one flag per test (<code>flag_date</code>, <code>flag_location</code> and the rest) plus one combined flag per parameter, <code>DATETIME_QC</code>, <code>LOCATION_QC</code>, <code>PRESSURE_QC</code>, <code>TEMPERATURE_QC</code>, <code>SALINITY_QC</code>, <code>CONDUCTIVITY_QC</code>. The SeaDataNet publication of FVON data names one flag per parameter after the parameter itself, <code>POSITION_QC</code>, <code>DEPTH_QC</code>, <code>TEMP_QC</code>, with <code>QV_SEADATANET</code> in ODV exports, and carries no separate time flag. Two things to settle: which set FVON adopts, and whether the per-test flags travel with the data or stay internal. The current names are also inconsistent: spike and stuck value carry one flag per parameter while global range carries one for all of them.</div>
 <div class="feedback">
-  <p><strong>How to give feedback.</strong> Every test has its own thread in the Discussions of the <a href="https://github.com/FVON-GOOS/qc-flags/discussions" target="_blank" rel="noopener">FVON-GOOS qc-flags repository</a> on GitHub, next to the global attributes vote. Reply there with the status you want (compulsory, optional, not applied), the thresholds you would apply and why. One reply per person is enough; edit it if you change your mind. This page is updated from the threads before each subcommittee meeting. To suggest a test that is not listed, use the <a href="{{NEW_ISSUE}}" target="_blank" rel="noopener">proposals thread</a>.</p>
+  <p><strong>How to vote.</strong> Whether each test is required, optional or not applicable is decided in the <a href="{{POLL}}" target="_blank" rel="noopener">poll</a> on GitHub: copy the ballot, write Req, Opt or N/A after each test and post it as one comment. Leave a line blank to skip a test. In the table, <em>current status</em> is what the code applies today and <em>poll</em> is the status FVON adopts; the <a href="https://github.com/FVON-GOOS/qc-flags/blob/main/RESULTS.md" target="_blank" rel="noopener">results page</a> shows the two side by side.</p>
+  <p><strong>How to give feedback.</strong> Every test also has its own thread in the Discussions of the <a href="https://github.com/FVON-GOOS/qc-flags/discussions" target="_blank" rel="noopener">FVON-GOOS qc-flags repository</a>, for the thresholds you would apply and why. To suggest a test that is not listed, use the <a href="{{NEW_ISSUE}}" target="_blank" rel="noopener">proposals thread</a>.</p>
 </div>
 <div class="tablewrap">
 {{TABLE}}
@@ -33,9 +34,9 @@
 
 <h2>What is settled and what is not</h2>
 <div class="prose">
-<p><strong>Settled:</strong> the seven compulsory tests, the flag scale, impossible location, the 8 and 30 knot speed limits, the spike thresholds for temperature and salinity and the stuck-value counts.</p>
-<p><strong>Open on the compulsory tests:</strong> the date cutoff, the per-sensor global-range tables, whether spike uses absolute differences or standard deviations, the stuck-value tolerance, and the manufacturers' calibration intervals.</p>
-<p><strong>To decide:</strong> the five tests in the last group, and the definitions of drift and mud. Proposed answers for all of them are in the July best-practices draft.</p>
+<p><strong>Settled:</strong> the flag scale, impossible location, the 8 and 30 knot speed limits, the spike thresholds for temperature and salinity and the stuck-value counts.</p>
+<p><strong>Open on the tests required today:</strong> the date cutoff, the per-sensor global-range tables, whether spike uses absolute differences or standard deviations, the stuck-value tolerance, and the manufacturers' calibration intervals.</p>
+<p><strong>To decide:</strong> the status of all sixteen tests, in the poll; the thresholds of the five tests with no status today; and the definitions of drift and mud. Proposed answers for all of them are in the July best-practices draft.</p>
 </div>
 
 <footer>FVON Data Management Subcommittee, September 2026. Source and discussions: github.com/FVON-GOOS/qc-flags.</footer>
