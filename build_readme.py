@@ -19,7 +19,7 @@ lines.append("One row per test: its current status, the parameters it flags, the
              "One row per test: its current status, the parameters it flags, the thresholds and the flag each condition produces, and what the group still has to decide.\n")
 lines.append(f"**How to vote.** Whether each test is required, optional or not applicable is decided in the [poll]({POLL}): copy the ballot, "
              "write Req, Opt or N/A after each test and post it as one comment. Leave a line blank to skip a test. "
-             "Results are in [RESULTS.md](RESULTS.md), next to the current status so the two can be compared.\n")
+             f"Results appear in [RESULTS.md](RESULTS.md) once at least {data.get('poll_min_voters', 3)} people have voted, next to the current status so the two can be compared.\n")
 lines.append("**How to give feedback.** Every test also has its own [Discussion](../../discussions) for the thresholds you would apply and why. "
              f"To suggest a test that is not listed, use the [proposals thread]({REPO}/discussions/{data.get('proposals_discussion', '')}).\n")
 lines.append("## Flag scale\n")

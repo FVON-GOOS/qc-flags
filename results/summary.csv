@@ -1,17 +1,17 @@
 Test,Current status,Poll result,Required,Optional,Not applicable
-Impossible date,required,Required,1,0,0
-Impossible location,required,Required,1,0,0
-Impossible speed,required,Required,1,0,0
-Global range,required,Required,1,0,0
-Spike,required,Required,1,0,0
-Stuck value,required,Required,1,0,0
-Calibration date,required,Required,1,0,0
-Climatology,optional,Optional,0,1,0
-Mud,optional,Optional,0,1,0
-Drift,optional,Optional,0,1,0
-Position on land,not applicable,Not applicable,0,0,1
-Gear type control,to decide,Optional,0,1,0
-Rate of change,to decide,Optional,0,1,0
-Cold surface,to decide,,0,0,0
-Response time,to decide,Optional,0,1,0
-Rollover,to decide,Optional,0,1,0
+Impossible date,required,,,,
+Impossible location,required,,,,
+Impossible speed,required,,,,
+Global range,required,,,,
+Spike,required,,,,
+Stuck value,required,,,,
+Calibration date,required,,,,
+Climatology,optional,,,,
+Mud,optional,,,,
+Drift,optional,,,,
+Position on land,not applicable,,,,
+Gear type control,to decide,,,,
+Rate of change,to decide,,,,
+Cold surface,to decide,,,,
+Response time,to decide,,,,
+Rollover,to decide,,,,

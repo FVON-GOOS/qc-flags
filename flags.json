@@ -303,5 +303,6 @@
     "pressure": "DEPTH_QC",
     "temperature": "TEMP_QC"
   },
-  "poll_discussion": 18
+  "poll_discussion": 18,
+  "poll_min_voters": 3
 }

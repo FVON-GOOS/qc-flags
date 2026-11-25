@@ -2,7 +2,7 @@
 
 One row per test: its current status, the parameters it flags, the thresholds and the flag each condition produces, and what the group still has to decide. The full page with the three flag standards is in [`docs/index.html`](docs/index.html) (rendered at https://fvon-goos.github.io/qc-flags/).
 
-**How to vote.** Whether each test is required, optional or not applicable is decided in the [poll](https://github.com/FVON-GOOS/qc-flags/discussions/18): copy the ballot, write Req, Opt or N/A after each test and post it as one comment. Leave a line blank to skip a test. Results are in [RESULTS.md](RESULTS.md), next to the current status so the two can be compared.
+**How to vote.** Whether each test is required, optional or not applicable is decided in the [poll](https://github.com/FVON-GOOS/qc-flags/discussions/18): copy the ballot, write Req, Opt or N/A after each test and post it as one comment. Leave a line blank to skip a test. Results appear in [RESULTS.md](RESULTS.md) once at least 3 people have voted, next to the current status so the two can be compared.
 
 **How to give feedback.** Every test also has its own [Discussion](../../discussions) for the thresholds you would apply and why. To suggest a test that is not listed, use the [proposals thread](https://github.com/FVON-GOOS/qc-flags/discussions/17).
 
