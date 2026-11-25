@@ -1,1 +1,16 @@
 Test,Voter,Date,Vote,Note,Link
+Impossible date,CarlesODN,2026-11-25,Req,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Impossible location,CarlesODN,2026-11-25,Req,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Impossible speed,CarlesODN,2026-11-25,Req,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Global range,CarlesODN,2026-11-25,Req,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Spike,CarlesODN,2026-11-25,Req,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Stuck value,CarlesODN,2026-11-25,Req,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Calibration date,CarlesODN,2026-11-25,Req,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Climatology,CarlesODN,2026-11-25,Opt,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Mud,CarlesODN,2026-11-25,Opt,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Drift,CarlesODN,2026-11-25,Opt,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Position on land,CarlesODN,2026-11-25,N/A,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Gear type control,CarlesODN,2026-11-25,Opt,very important for fixed gear on the in and out points,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Rate of change,CarlesODN,2026-11-25,Opt,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Response time,CarlesODN,2026-11-25,Opt,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
+Rollover,CarlesODN,2026-11-25,Opt,,https://github.com/FVON-GOOS/qc-flags/discussions/18#discussioncomment-19887127
