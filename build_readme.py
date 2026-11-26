@@ -13,10 +13,10 @@ def thr(t):
 
 lines = []
 lines.append("# FVON QC flags: where we are\n")
-lines.append("One row per test: its current status, the parameters it flags, the thresholds and the flag each condition produces, and what the group still has to decide. "
+lines.append("One row per test: what it checks, its current status, the parameters it flags, the thresholds and the flag each condition produces, and what the group still has to decide. "
              "The full page with the three flag standards is in [`docs/index.html`](docs/index.html) "
              f"(rendered at {data.get('pages_url', '')}).\n" if data.get("pages_url") else
-             "One row per test: its current status, the parameters it flags, the thresholds and the flag each condition produces, and what the group still has to decide.\n")
+             "One row per test: what it checks, its current status, the parameters it flags, the thresholds and the flag each condition produces, and what the group still has to decide.\n")
 lines.append(f"**How to vote.** Whether each test is required, optional or not applicable is decided in the [poll]({POLL}): copy the ballot, "
              "write Req, Opt or N/A after each test and post it as one comment. Leave a line blank to skip a test. "
              f"Results appear in [RESULTS.md](RESULTS.md) once at least {data.get('poll_min_voters', 3)} people have voted, next to the current status so the two can be compared.\n")
@@ -30,8 +30,8 @@ lines.append("## Variable names\n")
 lines.append("Each test writes its own flag, named under the test in the table, and contributes to the combined flag of every parameter it assesses. FVON names in the code today: " + ", ".join(f"{k} `{v}`" for k, v in qv.items()) + ". The SeaDataNet publication of FVON data names one flag per parameter after the parameter itself (" + ", ".join(f"{k} `{v}`" for k, v in sdn.items()) + ", `QV_SEADATANET` in ODV exports) and carries no separate time flag. Which set FVON adopts, and whether the per-test flags are published alongside the combined ones, is part of the discussion.\n")
 lines.append("## Test by test\n")
 lines.append("**Current status** is what the code applies today. **Poll** is the status FVON adopts, which the group is voting on.\n")
-lines.append("| Test | Current status | Poll | Parameters | Thresholds | Discussion |")
-lines.append("|---|---|---|---|---|---|")
+lines.append("| Test | What it checks | Current status | Poll | Parameters | Thresholds | Discussion |")
+lines.append("|---|---|---|---|---|---|---|")
 for t in data["tests"]:
     d = t.get("discussion_number")
     link = f"[{t['test']}]({REPO}/discussions/{d})" if d else t["test"]
@@ -41,10 +41,10 @@ for t in data["tests"]:
     if std: link += f"<br><sub>{std}</sub>"
     qv = data.get("qc_variables", {})
     params = "<br>".join(f"{x.strip()} `{qv.get(x.strip(), '')}`" for x in t["params"].split(","))
-    lines.append(f"| {link} | {t['status']} | [to be decided in the poll]({POLL}) | {params} | {thr(t)} | {t['discussion']} |")
+    lines.append(f"| {link} | {t.get('what', '')} | {t['status']} | [to be decided in the poll]({POLL}) | {params} | {thr(t)} | {t['discussion']} |")
 lines.append("")
 lines.append("## Files\n")
-lines.append("- `flags.json`: the data behind the table (current status, parameters, thresholds, discussion per test). Change it and run `build_flags.py` and `build_readme.py`.")
+lines.append("- `flags.json`: the data behind the table (what it checks, current status, parameters, thresholds, discussion per test). Change it and run `build_flags.py` and `build_readme.py`.")
 lines.append("- `RESULTS.md`, `results/`: the poll results, written by `tally.py` from the ballots in the poll discussion.")
 lines.append("- `docs/index.html`: the full page, including the description of the FVON, QARTOD and SeaDataNet standards.")
 lines.append("- `build_flags.py`, `build_readme.py`, `flags-body.html`, `page.css`: the generators.\n")

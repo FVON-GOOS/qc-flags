@@ -3,6 +3,7 @@
   "tests": [
     {
       "test": "Impossible date",
+      "what": "Checks that every timestamp is a real date inside a plausible window, neither before the earliest possible record nor in the future, and that records arrive at the expected interval.",
       "status": "required",
       "params": "time",
       "thresholds": [
@@ -23,6 +24,7 @@
     },
     {
       "test": "Impossible location",
+      "what": "Checks that latitude and longitude are valid coordinates on Earth.",
       "status": "required",
       "params": "position",
       "thresholds": [
@@ -39,6 +41,7 @@
     },
     {
       "test": "Impossible speed",
+      "what": "Works out the speed implied by consecutive positions and flags jumps faster than the vessel or gear can move, which point to GPS errors.",
       "status": "required",
       "params": "position",
       "thresholds": [
@@ -59,6 +62,7 @@
     },
     {
       "test": "Global range",
+      "what": "Checks that each value lies within what the sensor can measure or, when the sensor is unknown, within the limits found anywhere in the ocean.",
       "status": "required",
       "params": "temperature, pressure, salinity",
       "thresholds": [
@@ -79,6 +83,7 @@
     },
     {
       "test": "Spike",
+      "what": "Flags a single value that differs sharply from both the value before it and the value after it.",
       "status": "required",
       "params": "temperature, salinity, pressure",
       "thresholds": [
@@ -96,6 +101,7 @@
     },
     {
       "test": "Stuck value",
+      "what": "Flags a run of identical readings, the sign of a sensor that has stopped responding.",
       "status": "required",
       "params": "temperature, salinity, pressure",
       "thresholds": [
@@ -117,6 +123,7 @@
     },
     {
       "test": "Calibration date",
+      "what": "Checks that the sensor was calibrated within the manufacturer's recommended interval before the measurement was taken.",
       "status": "required",
       "params": "temperature, pressure, salinity",
       "thresholds": [
@@ -141,6 +148,7 @@
     },
     {
       "test": "Climatology",
+      "what": "Compares each value with what is normal for that place and season and flags values far outside it.",
       "status": "optional",
       "params": "temperature, salinity",
       "thresholds": [
@@ -157,6 +165,7 @@
     },
     {
       "test": "Mud",
+      "what": "Detects a sensor fouled by sediment after the gear touches the seabed, seen as distorted readings as the gear comes back up.",
       "status": "optional",
       "params": "temperature, salinity",
       "thresholds": [
@@ -173,15 +182,24 @@
     },
     {
       "test": "Drift",
+      "what": "Compares the first and last samples of the bottom segment of a tow and flags the whole tow when they differ too much; two points cannot tell sensor drift from a real change in the water.",
       "status": "optional",
       "params": "temperature, salinity",
       "thresholds": [
         [
-          "not defined",
+          "bottom segment under 24 h, first and last temperature more than 3 °C apart: whole tow",
+          3
+        ],
+        [
+          "bottom segment under 24 h, first and last salinity more than 8 PSU apart: whole tow",
+          3
+        ],
+        [
+          "bottom segment of 24 h or more: not checked",
           null
         ]
       ],
-      "discussion": "Decide between long-term calibration drift, which belongs to delayed mode, and a real-time damaged-sensor check on the bottom segment.",
+      "discussion": "Not a drift test: trawls cross fronts and bottom temperature changes with the tide. Soaks of 24 h or more, where drift would show, are never checked. One spike at either end is enough to trigger it. Good descent and ascent samples get 3 too. Same limits in every region and depth. Long-term calibration drift belongs to delayed mode.",
       "discussion_number": 10,
       "flag": [
         "flag_drift"
@@ -189,6 +207,7 @@
     },
     {
       "test": "Position on land",
+      "what": "Flags positions that fall on land according to a land mask such as ETOPO5.",
       "status": "not applicable",
       "params": "position",
       "thresholds": [
@@ -205,6 +224,7 @@
     },
     {
       "test": "Gear type control",
+      "what": "Checks that the positions fit how the gear works: fixed gear should stay close to where it was deployed.",
       "status": "to decide",
       "params": "position",
       "thresholds": [
@@ -225,6 +245,7 @@
     },
     {
       "test": "Rate of change",
+      "what": "Flags a value that changes from the previous one by much more than the normal variability of its segment.",
       "status": "to decide",
       "params": "temperature, salinity",
       "thresholds": [
@@ -241,6 +262,7 @@
     },
     {
       "test": "Cold surface",
+      "what": "Flags the first readings after the gear enters the water in extreme cold, when the sensor, chilled in the air before deployment, takes a few seconds to adjust to the real water temperature.",
       "status": "to decide",
       "params": "temperature",
       "thresholds": [
@@ -257,15 +279,24 @@
     },
     {
       "test": "Response time",
+      "what": "Flags samples on the descent and ascent where the gear moves up or down faster than the thermistor can follow; despite its name it measures vertical speed, not the sensor's response time.",
       "status": "to decide",
       "params": "temperature",
       "thresholds": [
         [
-          "not defined; thermistor lag blurs gradients",
+          "descent or ascent, vertical speed 1 to 2 dbar/s",
+          3
+        ],
+        [
+          "descent or ascent, vertical speed over 2 dbar/s",
+          4
+        ],
+        [
+          "fishing segment: not applied",
           null
         ]
       ],
-      "discussion": "Implement or not; quantify per sensor; 3 rather than 4 since the data are imprecise, not wrong.",
+      "discussion": "Rename it, since it measures vertical speed. One limit for every sensor: use each sensor's response time, its sampling rate and the temperature gradient instead. Flag 4 removes the data from GTS and ERDDAP. Meant for the top 10 dbar but applied at every depth. Repeated timestamps give an infinite speed and a 4. The lagged samples after a fast stretch are not flagged.",
       "discussion_number": 15,
       "flag": [
         "flag_response_time"
@@ -273,6 +304,7 @@
     },
     {
       "test": "Rollover",
+      "what": "Checks the deepest value of a profile, where the gear turns from descent to ascent, and flags it when it jumps away from its neighbour.",
       "status": "to decide",
       "params": "temperature",
       "thresholds": [

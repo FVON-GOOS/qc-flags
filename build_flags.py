@@ -20,13 +20,13 @@ def row(t):
     flags = t.get("flag") or []
     std = "".join(f'<code class="fname">{H.escape(f)}</code>' for f in flags)
     params = "<br>".join(f'{H.escape(x.strip())} <code class="qv">{H.escape(QV.get(x.strip(), ""))}</code>' for x in t["params"].split(","))
-    return (f'<tr><td>{H.escape(t["test"])}{std}{issue}</td>'
+    return (f'<tr><td>{H.escape(t["test"])}{std}{issue}</td><td class="what">{H.escape(t.get("what", ""))}</td>'
             f'<td><span class="bin {BIN[t["status"]]}">{H.escape(t["status"])}</span></td>'
             f'<td><a class="poll" href="{POLL}" target="_blank" rel="noopener">to be decided in the poll</a></td>'
             f'<td>{params}</td><td>{thr}</td><td>{H.escape(t["discussion"])}</td></tr>')
 
 rows = [row(t) for t in DATA["tests"]]
-table = ('<table class="matrix">\n<thead><tr><th>Test</th><th>Current status</th><th>Poll</th><th>Parameters</th><th>Thresholds</th><th>Discussion</th></tr></thead>\n'
+table = ('<table class="matrix">\n<thead><tr><th>Test</th><th>What it checks</th><th>Current status</th><th>Poll</th><th>Parameters</th><th>Thresholds</th><th>Discussion</th></tr></thead>\n'
          '<tbody>\n' + "\n".join(rows) + '\n</tbody>\n</table>')
 
 new_issue = f"{REPO}/discussions/{DATA.get('proposals_discussion', '')}"
@@ -36,7 +36,7 @@ EXTRA = """
 table.matrix{font-size:14.5px} table.matrix td:first-child{font-weight:600;white-space:nowrap}
 table.matrix td .fl{margin:0 3px;vertical-align:baseline}
 table.matrix tr.grp td{font-family:"Barlow Condensed",sans-serif;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--shallows);padding:6px 9px}
-table.matrix td:nth-child(5){min-width:26ch} table.matrix td:last-child{max-width:40ch}
+table.matrix td.what{min-width:26ch;max-width:36ch} table.matrix td:nth-child(6){min-width:26ch} table.matrix td:last-child{max-width:40ch}
 a.poll{font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:600;letter-spacing:.04em}
 code.fname{display:block;font-family:"IBM Plex Mono",Consolas,monospace;font-size:12.5px;font-weight:400;color:var(--ink-2);margin-top:3px}
 code.qv{font-family:"IBM Plex Mono",Consolas,monospace;font-size:12px;color:var(--ink-2);margin-left:4px}
