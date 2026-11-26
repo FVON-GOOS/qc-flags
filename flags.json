@@ -60,7 +60,7 @@
     {
       "test": "Global range",
       "status": "required",
-      "params": "temperature, pressure, salinity, conductivity",
+      "params": "temperature, pressure, salinity",
       "thresholds": [
         [
           "outside the sensor's range from the manufacturer table",
@@ -295,8 +295,7 @@
     "position": "LOCATION_QC",
     "pressure": "PRESSURE_QC",
     "temperature": "TEMPERATURE_QC",
-    "salinity": "SALINITY_QC",
-    "conductivity": "CONDUCTIVITY_QC"
+    "salinity": "SALINITY_QC"
   },
   "seadatanet_variables": {
     "position": "POSITION_QC",
